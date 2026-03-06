@@ -7,7 +7,7 @@ const HeroHome = () => {
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10">
 
         {/* Card 1 */}
-        <div className="bg-white dark:bg-gray-900 shadow-xl rounded-2xl p-8 hover:shadow-2xl transition">
+        <div className="bg-none dark:bg-gray-900  rounded-2xl p-8  transition">
           <div className="flex gap-4">
             <span className="flex items-center gap-2 bg-[#FAEBE1] text-[#FF6800] px-4 py-1 rounded-full text-sm font-medium transform hover:scale-105 transition duration-300">
               <Star size={16} fill="#FF6800" stroke="#FF6800" />
