@@ -24,7 +24,7 @@ const PremiumServices = () => {
               Premium Services
             </div>
 
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-5xl font-bold text-gray-900 dark:text-white">
               Get Noticed. <span className="text-orange-500">Get Hired.</span>
             </h2>
 
