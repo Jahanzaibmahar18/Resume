@@ -1,17 +1,18 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, X, ArrowUpRight, Sparkles } from "lucide-react";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
+  // FIXED: Standardized IDs to match your section IDs exactly
   const navLinks = [
-    { name: "Services", id: "services" },
-    { name: "Pricing", id: "pricing" },
-    { name: "Samples", id: "samples" },
-    { name: "Work",  id: "work" },
-    { name: "Process", id: "process" },
-    { name: "FAQ", id: "faq" },
+    { name: "Services", id: "#services" },
+    { name: "Pricing",  id: "#pricing" },
+    { name: "Samples",  id: "#sample" }, // Changed to #sample to match your Home.js
+    { name: "Work",     id: "#work" },
+    { name: "Process",  id: "#process" },
+    { name: "FAQ",      id: "#fqs" },
   ];
 
   useEffect(() => {
@@ -31,7 +32,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-8 flex items-center justify-between">
         
         {/* Brand Identity */}
-        <div className="flex items-center gap-3 group cursor-pointer">
+        <a href="#home" className="flex items-center gap-3 group cursor-pointer">
           <div className="relative w-10 h-10 bg-yellow-500 rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-all duration-300 shadow-[0_0_20px_rgba(234,179,8,0.5)]">
             <Sparkles size={22} className="text-black" />
           </div>
@@ -41,19 +42,18 @@ const Navbar = () => {
             </span>
             <span className="text-[10px] font-bold tracking-[0.4em] text-yellow-500 uppercase">Gallery</span>
           </div>
-        </div>
+        </a>
 
-        {/* Desktop Navigation with Animated Bottom Line */}
+        {/* Desktop Navigation */}
         <ul className="hidden lg:flex items-center gap-10">
           {navLinks.map((link) => (
             <li key={link.name} className="relative group">
               <a 
-                href={link.path} 
+                href={link.id} 
                 className="text-[12px] font-black uppercase tracking-[0.2em] text-white/80 group-hover:text-yellow-500 transition-colors duration-300 block py-2"
               >
                 {link.name}
               </a>
-              {/* Bottom Line Animation */}
               <span className="absolute bottom-0 left-0 w-0 h-[2.5px] bg-yellow-500 transition-all duration-300 group-hover:w-full"></span>
             </li>
           ))}
@@ -61,15 +61,12 @@ const Navbar = () => {
 
         {/* Action Area */}
         <div className="flex items-center gap-6">
-          
-          {/* Main CTA: High-Contrast Yellow Button */}
-          <button className="hidden sm:flex items-center gap-2 bg-yellow-500 text-black px-7 py-2.5 rounded-full font-black text-[12px] tracking-[0.15em] uppercase hover:bg-white hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-all active:scale-95">
+          <button className="hidden sm:flex items-center gap-2 bg-yellow-500 text-black px-7 py-2.5 rounded-full font-black text-[12px] tracking-[0.15em] uppercase hover:bg-white transition-all active:scale-95 shadow-[0_0_20px_rgba(234,179,8,0.2)]">
             Hire Me <ArrowUpRight size={16} />
           </button>
 
-          {/* Mobile Menu Toggle */}
           <button 
-            className="lg:hidden text-yellow-500 hover:scale-110 transition-transform"
+            className="lg:hidden text-yellow-500"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
@@ -78,19 +75,18 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Drawer */}
-      <div className={`lg:hidden fixed inset-x-0 top-0 h-screen bg-black transition-all duration-500 ease-in-out ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"}`}>
-        {/* Close Button inside Full Screen Menu */}
+      <div className={`lg:hidden fixed inset-0 h-screen bg-black z-[110] transition-all duration-500 ease-in-out ${isMobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0 pointer-events-none"}`}>
         <div className="flex justify-end p-8">
            <button onClick={() => setIsMobileMenuOpen(false)} className="text-yellow-500">
              <X size={40} />
            </button>
         </div>
         
-        <ul className="flex flex-col items-center justify-center h-full space-y-10 pb-20">
+        <ul className="flex flex-col items-center justify-center h-[70vh] space-y-10">
           {navLinks.map((link, i) => (
             <li key={link.name} className="text-center">
               <a 
-                href={link.path}
+                href={link.id} 
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-4xl font-black text-white hover:text-yellow-500 transition-all uppercase tracking-tighter"
               >
@@ -99,7 +95,7 @@ const Navbar = () => {
               </a>
             </li>
           ))}
-          <button className="mt-4 bg-yellow-500 text-black px-10 py-5 rounded-full font-black tracking-widest uppercase text-lg shadow-2xl">
+          <button className="mt-8 bg-yellow-500 text-black px-10 py-4 rounded-full font-black tracking-widest uppercase text-sm">
             Start A Project
           </button>
         </ul>
