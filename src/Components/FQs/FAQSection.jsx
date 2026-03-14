@@ -24,7 +24,7 @@ const FAQSection = () => {
   const profileImageUrl = "https://resumesuplift.com/_next/image?url=%2Fbrand%2FWhatsApp%2520Image%25202026-01-31%2520at%252012.05.58%2520AM.jpeg&w=1920&q=75";
 
   return (
-    <section id="faq" className="py-24 px-6 bg-black relative overflow-hidden">
+    <section id="faq" className="py-0 px-6 bg-black relative overflow-hidden">
       {/* Subtle Background Glow */}
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-yellow-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 

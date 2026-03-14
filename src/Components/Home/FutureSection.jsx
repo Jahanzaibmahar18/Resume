@@ -2,34 +2,34 @@ import React from "react";
 
 const FutureSection = () => {
   return (
-    <section className="relative overflow-hidden -mt-35 bg-white text-black py-24">
+    <section className="relative overflow-hidden -mt-35 bg-black text-white py-24">
 
       {/* Scrolling Background Text */}
       <div className="absolute inset-0 flex items-center overflow-hidden pointer-events-none">
         <div className="flex animate-marquee whitespace-nowrap">
-          <span className="text-[120px] font-extrabold tracking-widest text-black/10 mx-10">
+          <span className="text-[120px] font-extrabold tracking-widest text-white/10 mx-10">
             READY TO START
           </span>
-          <span className="text-[120px] font-extrabold tracking-widest text-black/10 mx-10">
+          <span className="text-[120px] font-extrabold tracking-widest text-white/10 mx-10">
             READY TO START
           </span>
-          <span className="text-[120px] font-extrabold tracking-widest text-black/10 mx-10">
+          <span className="text-[120px] font-extrabold tracking-widest text-white/10 mx-10">
             READY TO START
           </span>
-          <span className="text-[120px] font-extrabold tracking-widest text-black/10 mx-10">
+          <span className="text-[120px] font-extrabold tracking-widest text-white/10 mx-10">
             READY TO START
           </span>
         </div>
       </div>
 
       {/* Content */}
-      <div className="relative max-w-2xl mx-auto text-center px-">
-        <h1 className="text-[30px] md:text-[80px] lg:text-[100px] font-bold leading-tight">
-  Let’s Build <br />
-  <span className="text-orange-500">Your Future.</span>
-</h1>
+      <div className="relative max-w-2xl mx-auto text-center px-6">
+        <h1 className="text-[30px] md:text-[80px] lg:text-[100px] font-bold leading-tight text-white">
+          Let’s Build <br />
+          <span className="text-orange-500">Your Future.</span>
+        </h1>
 
-        <p className="mt-6 text-gray-600 text-2xl">
+        <p className="mt-6 text-gray-300 text-2xl">
           Stop blending in. Get the career documents that put you in the top 1%
           of applicants.
         </p>
@@ -44,7 +44,7 @@ const FutureSection = () => {
 
           <a
             href="#"
-            className="border border-black hover:border-orange-500 hover:text-orange-500 transition px-6 py-3 rounded-lg font-semibold"
+            className="border border-white hover:border-orange-500 hover:text-orange-500 transition px-6 py-3 rounded-lg font-semibold"
           >
             LinkedIn
           </a>

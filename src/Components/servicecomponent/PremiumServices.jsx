@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import {
   FileText,
   RefreshCcw,
@@ -6,19 +8,25 @@ import {
   Linkedin,
   Briefcase,
   ArrowRight,
-  Star,
   Sparkles
 } from "lucide-react";
 
 const PremiumServices = () => {
+  // AOS Initialization
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: false,
+    });
+  }, []);
+
   return (
-    <div className="py-24 bg-black">
+    <div className="py-24 bg-black overflow-hidden">
       <div className="max-w-7xl mx-auto px-8">
 
         {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
           <div className="max-w-2xl">
-            {/* Premium Badge */}
             <div className="inline-flex items-center gap-2 bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.3em] mb-6">
               <Sparkles size={14} fill="currentColor"/>
               Premium Services
@@ -42,11 +50,17 @@ const PremiumServices = () => {
         {/* Services Grid */}
         <div className="grid md:grid-cols-3 gap-6">
 
-          {/* Featured Large Card */}
-          <div className="group md:col-span-2 bg-slate-900/40 backdrop-blur-md border border-white/5 p-10 rounded-3xl hover:border-yellow-500/40 transition-all duration-500 relative overflow-hidden">
+          {/* Featured Large Card - FADE RIGHT */}
+          <div 
+            data-aos="fade-right"
+            className="group md:col-span-2 bg-slate-900/40 backdrop-blur-md border border-white/5 p-10 rounded-3xl hover:border-yellow-500/40 transition-all duration-500 relative overflow-hidden"
+          >
             <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-500/5 blur-3xl rounded-full"></div>
             
-            <FileText className="text-yellow-500 mb-6 group-hover:scale-110 transition-transform duration-500" size={32} />
+            {/* Icon with Background and Rotation */}
+            <div className="w-16 h-16 bg-yellow-500/10 rounded-2xl flex items-center justify-center mb-6 border border-yellow-500/20 group-hover:bg-yellow-500 transition-all duration-500">
+              <FileText className="text-yellow-500 group-hover:text-black group-hover:rotate-[360deg] transition-all duration-700" size={32} />
+            </div>
 
             <h3 className="text-2xl font-black text-white mb-4 tracking-tight">
               ATS Optimized CV/Resume Writing
@@ -66,9 +80,14 @@ const PremiumServices = () => {
             </button>
           </div>
 
-          {/* Secondary Card */}
-          <div className="group bg-slate-900/40 backdrop-blur-md border border-white/5 p-8 rounded-3xl hover:border-yellow-500/40 transition-all duration-500">
-            <RefreshCcw className="text-yellow-500 mb-6" size={28} />
+          {/* Secondary Card - FADE LEFT */}
+          <div 
+            data-aos="fade-left"
+            className="group bg-slate-900/40 backdrop-blur-md border border-white/5 p-8 rounded-3xl hover:border-yellow-500/40 transition-all duration-500"
+          >
+            <div className="w-14 h-14 bg-white/5 rounded-xl flex items-center justify-center mb-6 border border-white/10 group-hover:border-yellow-500/50 transition-all">
+               <RefreshCcw className="text-yellow-500 group-hover:rotate-[-360deg] transition-all duration-700" size={28} />
+            </div>
 
             <h3 className="text-xl font-black text-white mb-4 tracking-tight">
               Resume Revamp
@@ -86,15 +105,22 @@ const PremiumServices = () => {
             </button>
           </div>
 
-          {/* Row 2: Standard Cards */}
+          {/* Row 2: Standard Cards - FLIP DOWN */}
           {[
             { icon: <Mail size={24}/>, title: "Cover Letters", desc: "Persuasive, tailored letters that tell the human story behind your data." },
             { icon: <Linkedin size={24}/>, title: "LinkedIn Optimization", desc: "Full profile overhaul to increase search visibility and connection requests." },
             { icon: <Briefcase size={24}/>, title: "Career-Specific CVs", desc: "Niche expertise for Tech, Finance, Healthcare, and Executive roles." }
           ].map((service, idx) => (
-            <div key={idx} className="group bg-slate-900/40 border border-white/5 p-8 rounded-3xl hover:bg-slate-800/40 transition-all duration-500">
-              <div className="text-yellow-500 mb-6 group-hover:rotate-12 transition-transform">
-                {service.icon}
+            <div 
+              key={idx} 
+              data-aos="flip-down"
+              className="group bg-slate-900/40 border border-white/5 p-8 rounded-3xl hover:bg-slate-800/40 transition-all duration-500"
+            >
+              {/* Icon Container with Background */}
+              <div className="w-12 h-12 bg-yellow-500/5 rounded-lg flex items-center justify-center mb-6 border border-yellow-500/10 group-hover:bg-yellow-500 group-hover:text-black transition-all duration-500">
+                <div className="group-hover:rotate-[360deg] transition-all duration-700">
+                  {service.icon}
+                </div>
               </div>
 
               <h3 className="text-lg font-black text-white mb-3 tracking-tight">

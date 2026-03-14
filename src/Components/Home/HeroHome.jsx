@@ -1,7 +1,17 @@
-import React from "react";
-import { Star, CheckCircle, ArrowUpRight, Sparkles } from "lucide-react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { Star, CheckCircle, ArrowUpRight } from "lucide-react";
 
 const HeroHome = () => {
+  // AOS Initialization
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: false,
+    });
+  }, []);
+
   return (
     <div className="pt-32 pb-20 px-6 bg-black min-h-screen relative overflow-hidden">
       {/* Subtle Background Glow for depth */}
@@ -9,8 +19,11 @@ const HeroHome = () => {
       
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 relative z-10">
 
-        {/* Card 1: Value Proposition */}
-        <div className="bg-slate-900/40 backdrop-blur-md border border-white/5 rounded-3xl p-10 flex flex-col justify-center">
+        {/* Card 1: Value Proposition - ZOOM IN */}
+        <div 
+          data-aos="zoom-in"
+          className="bg-slate-900/40 backdrop-blur-md border border-white/5 rounded-3xl p-10 flex flex-col justify-center"
+        >
           <div className="flex flex-wrap gap-3">
             <span className="flex items-center gap-2 bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest transition duration-300">
               <Star size={14} fill="currentColor" />
@@ -49,7 +62,7 @@ const HeroHome = () => {
             <div className="flex -space-x-3">
               {[1, 2, 3, 4].map((i) => (
                 <div key={i} className="w-10 h-10 rounded-full border-2 border-black bg-slate-800 flex items-center justify-center text-[10px] font-bold text-white">
-                   USR
+                    USR
                 </div>
               ))}
             </div>
@@ -59,8 +72,11 @@ const HeroHome = () => {
           </div>
         </div>
 
-        {/* Card 2: Expert Profile */}
-        <div className="relative bg-slate-900/60 backdrop-blur-xl border border-yellow-500/10 rounded-3xl p-10 overflow-hidden flex flex-col justify-center shadow-2xl">
+        {/* Card 2: Expert Profile - ZOOM IN UP */}
+        <div 
+          data-aos="zoom-in-up"
+          className="relative bg-slate-900/60 backdrop-blur-xl border border-yellow-500/10 rounded-3xl p-10 overflow-hidden flex flex-col justify-center shadow-2xl"
+        >
           
           {/* Decorative Sparkle */}
           <div className="absolute -top-10 -right-10 w-40 h-40 bg-yellow-500/10 rounded-full blur-3xl"></div>

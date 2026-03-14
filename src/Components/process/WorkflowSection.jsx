@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { UploadCloud, Search, PenTool, Rocket, ArrowRight, Sparkles } from "lucide-react";
 
 const steps = [
@@ -29,8 +31,16 @@ const steps = [
 ];
 
 const WorkflowSection = () => {
+  // AOS Initialization
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: false,
+    });
+  }, []);
+
   return (
-    <section id="process" className="py-24 px-6 bg-black relative overflow-hidden">
+    <section id="process" className="py-14 px-6 bg-black relative overflow-hidden">
       
       {/* Background Decorative Element */}
       <div className="absolute top-1/4 -left-20 w-96 h-96 bg-yellow-500/5 blur-[100px] rounded-full pointer-events-none"></div>
@@ -42,10 +52,19 @@ const WorkflowSection = () => {
           Workflow
         </div>
 
-        <h2 className="text-5xl lg:text-7xl font-black text-white mb-2 tracking-tighter uppercase">
+        {/* AOS FADE RIGHT */}
+        <h2 
+          data-aos="fade-right"
+          className="text-5xl lg:text-7xl font-black text-white mb-2 tracking-tighter uppercase"
+        >
           Your Roadmap to
         </h2>
-        <h2 className="text-5xl lg:text-7xl font-black text-yellow-500 tracking-tighter uppercase italic">
+        
+        {/* AOS FADE LEFT */}
+        <h2 
+          data-aos="fade-left"
+          className="text-5xl lg:text-7xl font-black text-yellow-500 tracking-tighter uppercase italic"
+        >
           The Next Level.
         </h2>
 
@@ -67,6 +86,8 @@ const WorkflowSection = () => {
             return (
               <div
                 key={index}
+                data-aos="zoom-in"
+                data-aos-delay={index * 150} // Staggered delay for better visual flow
                 className="group relative bg-[#0A0A0A] border border-white/5 rounded-[32px] p-8 transition-all duration-500 hover:border-yellow-500/40 hover:bg-[#0F0F0F]"
               >
                 {/* Step Number */}
@@ -101,7 +122,7 @@ const WorkflowSection = () => {
       </div>
 
       {/* Button */}
-      <div className="text-center mt-20 relative z-10">
+      <div className="text-center mt-10 relative z-10">
         <button className="group inline-flex items-center gap-3 bg-yellow-500 hover:bg-white text-black font-black uppercase tracking-widest text-xs px-10 py-5 rounded-full transition-all shadow-[0_10px_40px_rgba(234,179,8,0.15)] active:scale-95">
           Ready to see the difference?
           <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />

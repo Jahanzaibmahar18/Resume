@@ -1,8 +1,5 @@
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, FreeMode } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/free-mode";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const clients = [
   { name: "Nvidia", logo: "https://s3.amazonaws.com/cms.ipressroom.com/219/files/202512/692f50553d6332b453bbc5c2_nvidia-logo-vert-blk/nvidia-logo-vert-blk_thmb.png" },
@@ -17,82 +14,95 @@ const clients = [
   { name: "Google", logo: "https://storage.googleapis.com/gd-prod/images/a910d418-7123-4bc4-aa3b-ef7e25e74ae6.faa49ab5e1fff880.webp" },
   { name: "Tesla", logo: "https://www.logo.wine/a/logo/Tesla%2C_Inc./Tesla%2C_Inc.-Logomark-Black-Logo.wine.svg" },
   { name: "OpenAI", logo: "https://1000logos.net/wp-content/uploads/2025/02/OpenAI-Logo.png" },
-  { name: "Microsoft", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/2048px-Microsoft_logo.svg.png" },
-  { name: "Uber", logo: "https://download.logo.wine/logo/Uber/Uber-Logo.wine.png" },
-  { name: "Amazon", logo: "https://www.hatchwise.com/wp-content/uploads/2022/08/Amazon-Logo-2000-present-1024x576.jpeg" },
-  { name: "Airbnb", logo: "https://images.seeklogo.com/logo-png/28/2/airbnb-logo-png_seeklogo-284907.png" },
 ];
 
-const ClientsSwiper = () => {
-  return (
-    <div className="py-20 bg-black overflow-hidden border-t border-white/5">
-      
-      <div className="flex flex-col items-center mb-12">
-        <h5 className="text-xs font-black uppercase tracking-[0.5em] text-yellow-500 mb-3">
-          Global Reach
-        </h5>
-        <h2 className="text-2xl font-bold text-white tracking-tighter">
-          Our Clients Work At <span className="italic text-yellow-500">World-Class</span> Companies
-        </h2>
-      </div>
+const CircularClients = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const radius = 260; 
 
-      <Swiper
-        modules={[Autoplay, FreeMode]}
-        spaceBetween={20}
-        slidesPerView={2}
-        breakpoints={{
-          640: { slidesPerView: 4 },
-          1024: { slidesPerView: 6 },
-          1280: { slidesPerView: 8 },
-        }}
-        loop={true}
-        freeMode={true}
-        speed={4000}
-        autoplay={{
-          delay: 0,
-          disableOnInteraction: false,
-        }}
-        className="clients-swiper"
-      >
-        {clients.map((client, idx) => (
-          <SwiperSlide key={idx} className="pb-4">
-            <div className="
-              flex items-center justify-center gap-3
-              bg-white rounded-xl
-              px-4 py-3
-              h-14
-              border border-transparent
-              hover:border-yellow-500
-              hover:shadow-[0_0_15px_rgba(234,179,8,0.3)]
-              transition-all duration-500
-              group cursor-default
-            ">
-              {/* FIXED IMAGE LOGIC */}
-              <div className="h-7 w-auto flex items-center justify-center overflow-hidden">
-                <img
-                  src={client.logo}
-                  alt={client.name}
-                  className="h-full w-full object-contain transition-all duration-500 filter contrast-125"
-                />
-              </div>
-              
-              <span className="text-[10px] font-black uppercase tracking-widest text-black/80 group-hover:text-yellow-600 transition-colors">
-                {client.name}
-              </span>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      
-      {/* Visual Fade Gradient for Premium Look */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        .clients-swiper {
-          mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-          -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-        }
-      `}} />
-    </div>
+  return (
+    <motion.div 
+      animate={{ height: isOpen ? "700px" : "150px" }}
+      transition={{ type: "spring", stiffness: 100, damping: 20 }}
+      className="relative flex justify-center items-center bg-black overflow-hidden w-full"
+    >
+      <div className="relative flex items-center justify-center w-full h-full">
+        
+        {/* Center Button - Initial size matches Client Cards */}
+        <motion.button
+          onClick={() => setIsOpen(!isOpen)}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className={`z-50 flex flex-col items-center justify-center bg-white border-2 border-yellow-500 shadow-xl cursor-pointer transition-all duration-500 ${
+            isOpen ? "w-28 h-28 rounded-full" : "w-32 h-16 rounded-xl"
+          }`}
+        >
+          <span className="font-bold uppercase text-[10px] tracking-widest text-black leading-none">
+            {isOpen ? "Close" : "Clients"}
+          </span>
+          {!isOpen && (
+            <span className="text-[7px] font-bold opacity-40 mt-1 uppercase leading-none">
+              Click to Expand
+            </span>
+          )}
+        </motion.button>
+
+        {/* Circular Orbit - Classic Rotation */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ rotate: 0, scale: 0, opacity: 0 }}
+              animate={{ rotate: 360, scale: 1, opacity: 1 }}
+              exit={{ rotate: 0, scale: 0, opacity: 0 }}
+              transition={{ 
+                rotate: { duration: 60, repeat: Infinity, ease: "linear" },
+                scale: { duration: 0.5, ease: "easeOut" },
+                opacity: { duration: 0.3 }
+              }}
+              className="absolute w-[550px] h-[550px] flex items-center justify-center pointer-events-none"
+            >
+              {clients.map((client, idx) => {
+                const angle = (idx / clients.length) * 2 * Math.PI;
+                const x = Math.cos(angle) * radius;
+                const y = Math.sin(angle) * radius;
+
+                return (
+                  <motion.div
+                    key={idx}
+                    initial={{ x: 0, y: 0 }}
+                    animate={{ x: x, y: y }}
+                    className="absolute pointer-events-auto"
+                  >
+                    {/* Reverse rotation ensures logos stay upright while orbiting */}
+                    <motion.div 
+                        animate={{ rotate: -360 }}
+                        transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+                        className="relative group"
+                    >
+                      {/* Logo Card */}
+                      <div className="bg-white p-3 rounded-xl border border-gray-200 w-32 h-16 flex items-center justify-center shadow-md hover:border-yellow-500 hover:scale-110 transition-all duration-300 cursor-pointer">
+                        <img
+                          src={client.logo}
+                          alt={client.name}
+                          className="max-h-full max-w-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300"
+                        />
+                      </div>
+
+                      {/* Yellow Tooltip Name */}
+                      <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-yellow-500 text-black text-[9px] font-black uppercase px-3 py-1.5 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:-translate-y-1 pointer-events-none whitespace-nowrap z-[60]">
+                        {client.name}
+                        <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-yellow-500 rotate-45"></div>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.div>
   );
 };
 
-export default ClientsSwiper;
+export default CircularClients;

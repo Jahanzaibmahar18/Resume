@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { Search, Target, FileText, CheckCircle, Sparkles, ArrowRight } from "lucide-react";
 
 const AuditSection = () => {
+  // AOS Initialization
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: false,
+    });
+  }, []);
+
   return (
-    <section id="process" className="py-24 bg-black px-6 relative overflow-hidden">
+    <section id="process" className="py-2 bg-black px-6 relative overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-yellow-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 
@@ -14,7 +24,11 @@ const AuditSection = () => {
           Free Resume Audit
         </div>
 
-        <h2 className="text-5xl lg:text-7xl font-black text-white mb-6 tracking-tighter leading-tight">
+        {/* Updated Heading with AOS */}
+        <h2 
+          data-aos="zoom-in-down"
+          className="text-5xl lg:text-7xl font-black text-white mb-6 tracking-tighter leading-tight"
+        >
           Know Your <span className="text-yellow-500 italic">Weak Spots.</span>
         </h2>
 
@@ -26,8 +40,11 @@ const AuditSection = () => {
       {/* CARDS CONTAINER */}
       <div className="max-w-7xl mx-auto grid lg:grid-cols-5 gap-8 relative z-10">
         
-        {/* LEFT CARD: WHAT YOU RECEIVE (Span 3) */}
-        <div className="lg:col-span-3 bg-[#0A0A0A] border border-white/10 rounded-[32px] p-8 lg:p-12 transition-all duration-500 hover:border-yellow-500/30">
+        {/* LEFT CARD: WHAT YOU RECEIVE (ZOOM-IN-UP) */}
+        <div 
+          data-aos="zoom-in-up"
+          className="lg:col-span-3 bg-[#0A0A0A] border border-white/10 rounded-[32px] p-8 lg:p-12 transition-all duration-500 hover:border-yellow-500/30"
+        >
           <h3 className="text-3xl font-black text-white mb-4 uppercase tracking-tighter">
             The Audit <span className="text-yellow-500">Payload</span>
           </h3>
@@ -89,8 +106,11 @@ const AuditSection = () => {
           </div>
         </div>
 
-        {/* RIGHT CARD: COMPARISON (Span 2) */}
-        <div className="lg:col-span-2 bg-yellow-500 rounded-[32px] p-1 font-bold shadow-[0_20px_50px_rgba(234,179,8,0.1)]">
+        {/* RIGHT CARD: COMPARISON (ZOOM-IN) */}
+        <div 
+          data-aos="zoom-in"
+          className="lg:col-span-2 bg-yellow-500 rounded-[32px] p-1 font-bold shadow-[0_20px_50px_rgba(234,179,8,0.1)]"
+        >
           <div className="bg-[#0A0A0A] rounded-[30px] h-full p-8 flex flex-col">
             <div className="inline-block bg-yellow-500 text-black px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest mb-6 w-fit">
               Fix Preview
