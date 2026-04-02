@@ -66,14 +66,14 @@ const Footer = () => {
               href="mailto:resumeuplift@gmail.com"
               className="flex items-center gap-3 hover:text-[#F0B100] transition"
             >
-              <Mail size={18} /> resumeuplift@gmail.com
+              <Mail size={18} /> jahanzaibmahar18@gmail.com 
             </a>
 
             <a
-              href="tel:+923076341412"
+              href="tel:+923076341312"
               className="flex items-center gap-3 hover:text-[#F0B100] transition"
             >
-              <Phone size={18} /> +92 307 6341412
+              <Phone size={18} /> +92 307 6341312 
             </a>
           </div>
         </div>
